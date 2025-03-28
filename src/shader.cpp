@@ -83,7 +83,7 @@ void Shader::setMat4(const std::string& name, const glm::mat4& mat) const {
 void Shader::setVec3(const std::string& name, const glm::vec3& value) const {
     glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
 }
-
+/*
 // Utility functions to set uniform values
 void Shader::setBool(const std::string& name, bool value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
@@ -94,6 +94,7 @@ void Shader::setInt(const std::string& name, int value) const {
 void Shader::setFloat(const std::string& name, float value) const {
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
+*/
 
 // Destructor
 Shader::~Shader() {
