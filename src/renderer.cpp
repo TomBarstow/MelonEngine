@@ -2,26 +2,52 @@
 
 // Define cube vertices (Position, Texture Coords)
 float vertices[] = {
-    // Positions         // Texture Coords
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,  // 0
-     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,  // 1
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,  // 2
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,  // 3
+    // Positions           // Texture Coords // Normals
+    // Back face
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,  0.0f,  0.0f, -1.0f, // 0
+     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,  0.0f,  0.0f, -1.0f, // 1
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,  0.0f,  0.0f, -1.0f, // 2
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,  0.0f,  0.0f, -1.0f, // 3
 
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,  // 4
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,  // 5
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,  // 6
-    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f   // 7
+    // Front face
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,  0.0f,  0.0f,  1.0f, // 4
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,  0.0f,  0.0f,  1.0f, // 5
+     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,  0.0f,  0.0f,  1.0f, // 6
+    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,  0.0f,  0.0f,  1.0f, // 7
+
+    // Left face
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  0.0f,  0.0f, // 8
+    -0.5f,  0.5f, -0.5f,  1.0f, 0.0f, -1.0f,  0.0f,  0.0f, // 9
+    -0.5f,  0.5f,  0.5f,  1.0f, 1.0f, -1.0f,  0.0f,  0.0f, // 10
+    -0.5f, -0.5f,  0.5f,  0.0f, 1.0f, -1.0f,  0.0f,  0.0f, // 11
+
+    // Right face
+     0.5f, -0.5f, -0.5f,  0.0f, 0.0f,  1.0f,  0.0f,  0.0f, // 12
+     0.5f,  0.5f, -0.5f,  1.0f, 0.0f,  1.0f,  0.0f,  0.0f, // 13
+     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,  1.0f,  0.0f,  0.0f, // 14
+     0.5f, -0.5f,  0.5f,  0.0f, 1.0f,  1.0f,  0.0f,  0.0f, // 15
+
+     // Bottom face
+     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,  0.0f, -1.0f,  0.0f, // 16
+      0.5f, -0.5f, -0.5f,  1.0f, 0.0f,  0.0f, -1.0f,  0.0f, // 17
+      0.5f, -0.5f,  0.5f,  1.0f, 1.0f,  0.0f, -1.0f,  0.0f, // 18
+     -0.5f, -0.5f,  0.5f,  0.0f, 1.0f,  0.0f, -1.0f,  0.0f, // 19
+
+     // Top face
+     -0.5f,  0.5f, -0.5f,  0.0f, 0.0f,  0.0f,  1.0f,  0.0f, // 20
+      0.5f,  0.5f, -0.5f,  1.0f, 0.0f,  0.0f,  1.0f,  0.0f, // 21
+      0.5f,  0.5f,  0.5f,  1.0f, 1.0f,  0.0f,  1.0f,  0.0f, // 22
+     -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,  0.0f,  1.0f,  0.0f  // 23
 };
 
 // Define cube indices (2 triangles per face, 6 faces)
 unsigned int indices[] = {
-    0, 1, 2, 2, 3, 0,  // Back face
-    4, 5, 6, 6, 7, 4,  // Front face
-    0, 4, 7, 7, 3, 0,  // Left face
-    1, 5, 6, 6, 2, 1,  // Right face
-    3, 2, 6, 6, 7, 3,  // Top face
-    0, 1, 5, 5, 4, 0   // Bottom face
+    0, 1, 2, 2, 3, 0,   // Back face
+    4, 5, 6, 6, 7, 4,   // Front face
+    8, 9, 10, 10, 11, 8, // Left face
+    12, 13, 14, 14, 15, 12, // Right face
+    16, 17, 18, 18, 19, 16, // Bottom face
+    20, 21, 22, 22, 23, 20  // Top face
 };
 
 // VAO, VBO, EBO
@@ -43,11 +69,11 @@ Renderer::Renderer() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     // Position Attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
     // Texture Coordinate Attribute
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
     glBindVertexArray(0);
