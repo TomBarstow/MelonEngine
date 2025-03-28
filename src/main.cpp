@@ -5,52 +5,23 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 
-// Window dimensions
-const int WIDTH = 800, HEIGHT = 600;
+#include "Shader.h"
+#include "Renderer.h"
 
-// GLFW error callback function
-void errorCallback(int error, const char* description) {
-    std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
-}
-
-// Main function
 int main() {
-    // Initialize GLFW
-    if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
-        return -1;
-    }
-
-    glfwSetErrorCallback(errorCallback);
-
-    // OpenGL version 4.5 Core Profile
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    // Create a windowed mode window and its OpenGL context
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "OpenGL Engine", NULL, NULL);
-    if (!window) {
-        std::cerr << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-
+    glfwInit();
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Melon Engine v0", NULL, NULL);
     glfwMakeContextCurrent(window);
+    glewInit();
 
-    // Initialize GLEW
-    glewExperimental = GL_TRUE;
-    if (glewInit() != GLEW_OK) {
-        std::cerr << "Failed to initialize GLEW" << std::endl;
-        return -1;
-    }
+    Shader shader("C:/Users/Disco/source/repos/MelonEngine/shaders/vertex_shader.glsl", "C:/Users/Disco/source/repos/MelonEngine/shaders/fragment_shader.glsl");
+    Renderer renderer;
 
-    // Viewport settings
-    glViewport(0, 0, WIDTH, HEIGHT);
-
-    // Main loop
     while (!glfwWindowShouldClose(window)) {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        shader.use();
+        renderer.render();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
