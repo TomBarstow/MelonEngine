@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include <glm/gtc/type_ptr.hpp>  // Needed for glm::value_ptr
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -72,6 +73,10 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) {
 // Activate the shader
 void Shader::use() {
     glUseProgram(ID);
+}
+
+void Shader::setMat4(const std::string& name, const glm::mat4& mat) const {
+    glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(mat));
 }
 
 // Utility functions to set uniform values

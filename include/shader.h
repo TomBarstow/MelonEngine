@@ -3,10 +3,13 @@
 
 #include <string>
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 class Shader {
 public:
     GLuint ID;
+
+    void setMat4(const std::string& name, const glm::mat4& mat) const;
 
     // Constructor: loads & compiles shaders
     Shader(const std::string& vertexPath, const std::string& fragmentPath);
