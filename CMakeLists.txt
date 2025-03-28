@@ -25,7 +25,7 @@ find_package(OpenGL REQUIRED)
 
 
 # Add source to this project's executable.
-add_executable (MelonEngine src/main.cpp src/renderer.cpp src/shader.cpp)
+add_executable (MelonEngine src/main.cpp src/renderer.cpp src/shader.cpp src/camera.cpp)
 
 # Link libraries
 target_link_libraries(MelonEngine glfw3 glew32 OpenGL::GL)
