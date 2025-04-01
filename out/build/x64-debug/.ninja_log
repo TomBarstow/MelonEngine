@@ -1,6 +1,0 @@
-# ninja log v6
-10	512	7648703783940789	CMakeFiles/MelonEngine.dir/src/shader.cpp.obj	70b2c12ceea2d78c
-7	513	7648703783915352	CMakeFiles/MelonEngine.dir/src/renderer.cpp.obj	5014243c505a61fb
-3	981	7648703783774676	CMakeFiles/MelonEngine.dir/src/main.cpp.obj	4fb5e0369ef1149
-17	180	7648705923638462	build.ninja	1ad33e583f852631
-27	286	7648705924745452	MelonEngine.exe	ca80ed1911533fda
