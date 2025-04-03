@@ -1,23 +1,30 @@
-
+﻿
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <iostream>
+//#include <iostream>
+
+#include <Console.h>
+#include <InputManager.h>
+
 
 int main(void)
 {
-    GLFWwindow* window;
-
-    /* Initialize the library */
+    //GLFW Library Initialization
     if (!glfwInit())
         return -1;
+    Console("GLFW Initialized");
 
-    glewInit();
-
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(800, 800, "Melon Engine Demo", NULL, NULL);
+    //OpenGL Version and Profile
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    //glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    
+    //Create window (window mode) in OpenGL context
+    GLFWwindow* window = glfwCreateWindow(800, 800, "Melon Engine Demo", NULL, NULL);
     if (!window)
     {
+        Console("Error creating GLFW window! \_(-_-)_/");
         glfwTerminate();
         return -1;
     }
@@ -25,12 +32,32 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
-    if (glewInit() != GLEW_OK)
-        std::cout << "GLEW ERROR!" << std::endl;
+    //VSYNC
+    glfwSwapInterval(1);
+
+    // GLEW Initialization
+    glewInit();
+
+    if (glewInit() != GLEW_OK) {
+        Console("Error initializing GLEW!");
+        glfwTerminate();
+        return -1;
+    }
+
+    //Initialize Input Manager
+    InputManager input;
+    input.initialize(window);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
+        //Testing input manager to console
+        input.update();
+
+        if (input.keyPressed(GLFW_KEY_W)) {
+            Console("W key");
+        }
+        
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -54,8 +81,10 @@ int main(void)
 
         /* Poll for and process events */
         glfwPollEvents();
+
     }
 
+    glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
 }
