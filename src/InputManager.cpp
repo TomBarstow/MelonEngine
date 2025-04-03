@@ -1,23 +1,31 @@
 #include <InputManager.h>
 //#include <unordered_map>
-#include <iostream>
+//#include <iostream>
+#include <console.h>
 
 void InputManager::initialize(GLFWwindow* window) {
     if (!window) {
-        std::cerr << "Error: GLFW window is not initialized!" << std::endl;
+        Console("Error: GLFW window is not initialized!");
         return;
     }
     // Assign the window pointer
     this->window = window;
     
+    // Clear hashtables
     keyStates.clear();
     previousKeyStates.clear();
+
+    //Map actions to keys
+    mapActionToKey("Forward", GLFW_KEY_W);
+    mapActionToKey("Backward", GLFW_KEY_S);
+    mapActionToKey("Left", GLFW_KEY_A);
+    mapActionToKey("Right", GLFW_KEY_D);
 }
 
 // Update keyStates based on input
 void InputManager::update() {
     if (window == nullptr) {
-        std::cerr << "Error: Invalid GLFW window pointer!" << std::endl;
+        Console("Error: Invalid GLFW window pointer!");
         return;
     }   
     
@@ -37,6 +45,11 @@ void InputManager::update() {
     
 }
 
-bool InputManager::keyPressed(int key) {
+void InputManager::mapActionToKey(const std::string& action, int key) {
+    actionKeyMap[action] = key;
+}
+
+bool InputManager::actionPressed(const std::string& action) {
+    int key = actionKeyMap[action];
     return keyStates[key];
 }

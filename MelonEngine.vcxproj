@@ -164,6 +164,7 @@
     <ClInclude Include="Dependencies\GLEW\include\GL\wglew.h" />
     <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3.h" />
     <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3native.h" />
+    <ClInclude Include="Dependencies\INIreader\INIreader.hpp" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\InputManager.h" />
   </ItemGroup>

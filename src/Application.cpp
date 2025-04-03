@@ -45,7 +45,7 @@ int main(void)
     }
 
     //Initialize Input Manager
-    InputManager input;
+    static InputManager input;
     input.initialize(window);
 
     /* Loop until the user closes the window */
@@ -54,13 +54,14 @@ int main(void)
         //Testing input manager to console
         input.update();
 
-        if (input.keyPressed(GLFW_KEY_W)) {
-            Console("W key");
+        if (input.actionPressed("Forward")) {
+            Console("W key - Forward");
         }
         
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
+        //Triforce lol
         glBegin(GL_TRIANGLES); //top
         glVertex2f(-0.3f, 0.0f);
         glVertex2f(0.3f, 0.0f);
