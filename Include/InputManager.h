@@ -8,16 +8,16 @@
 class InputManager {
 
 public:
-	void initialize(GLFWwindow* window);
-	void update();
-	void mapActionToKey(const std::string& action, int key);
-	bool actionPressed(const std::string& action);
+	static void initialize(GLFWwindow* window);
+	static void update();
+	static void mapActionToKey(const std::string& action, int key);
+	static bool actionPressed(const std::string& action);
 
 private:
-	std::unordered_map<int, bool> keyStates;
-	std::unordered_map<int, bool> previousKeyStates;
-	std::unordered_map<std::string, int> actionKeyMap; //Maps actions to keys
-	GLFWwindow* window;  // Pointer to the GLFW window
+	static std::unordered_map<int, bool> _keyStates;
+	static std::unordered_map<int, bool> _previousKeyStates;
+	static std::unordered_map<std::string, int> _actionKeyMap; //Maps actions to keys
+	static GLFWwindow* _window;  // Pointer to the GLFW window
 
 };
 

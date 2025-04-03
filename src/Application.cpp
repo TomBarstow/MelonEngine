@@ -45,16 +45,16 @@ int main(void)
     }
 
     //Initialize Input Manager
-    static InputManager input;
-    input.initialize(window);
+    //InputManager input;
+    InputManager::initialize(window);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         //Testing input manager to console
-        input.update();
+        InputManager::update();
 
-        if (input.actionPressed("Forward")) {
+        if (InputManager::actionPressed("Forward")) {
             Console("W key - Forward");
         }
         

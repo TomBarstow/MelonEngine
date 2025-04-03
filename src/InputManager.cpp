@@ -3,17 +3,24 @@
 //#include <iostream>
 #include <console.h>
 
+std::unordered_map<int, bool> InputManager::_keyStates;
+std::unordered_map<int, bool> InputManager::_previousKeyStates;
+std::unordered_map<std::string, int> InputManager::_actionKeyMap;
+GLFWwindow* InputManager::_window;
+
 void InputManager::initialize(GLFWwindow* window) {
     if (!window) {
         Console("Error: GLFW window is not initialized!");
         return;
     }
+    
+
     // Assign the window pointer
-    this->window = window;
+    _window = window;
     
     // Clear hashtables
-    keyStates.clear();
-    previousKeyStates.clear();
+    _keyStates.clear();
+    _previousKeyStates.clear();
 
     //Map actions to keys
     mapActionToKey("Forward", GLFW_KEY_W);
@@ -24,32 +31,32 @@ void InputManager::initialize(GLFWwindow* window) {
 
 // Update keyStates based on input
 void InputManager::update() {
-    if (window == nullptr) {
+    if (_window == nullptr) {
         Console("Error: Invalid GLFW window pointer!");
         return;
     }   
     
-    previousKeyStates = keyStates;
+    _previousKeyStates = _keyStates;
 
     for (int key = GLFW_KEY_SPACE; key <= GLFW_KEY_LAST; ++key) {
-        int state = glfwGetKey(window, key);
+        int state = glfwGetKey(_window, key);
 
         // Update the key state
         if (state == GLFW_PRESS) {
-            keyStates[key] = true;  // Key is pressed
+            _keyStates[key] = true;  // Key is pressed
         }
         else {
-            keyStates[key] = false;  // Key is not pressed
+            _keyStates[key] = false;  // Key is not pressed
         }
     }
     
 }
 
 void InputManager::mapActionToKey(const std::string& action, int key) {
-    actionKeyMap[action] = key;
+    _actionKeyMap[action] = key;
 }
 
 bool InputManager::actionPressed(const std::string& action) {
-    int key = actionKeyMap[action];
-    return keyStates[key];
+    int key = _actionKeyMap[action];
+    return _keyStates[key];
 }
