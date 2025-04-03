@@ -1,3 +1,0 @@
-C:/Users/Disco/source/repos/MelonEngine/out/build/x64-debug/CMakeFiles/MelonEngine.dir
-C:/Users/Disco/source/repos/MelonEngine/out/build/x64-debug/CMakeFiles/edit_cache.dir
-C:/Users/Disco/source/repos/MelonEngine/out/build/x64-debug/CMakeFiles/rebuild_cache.dir
