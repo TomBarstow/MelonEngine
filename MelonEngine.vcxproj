@@ -142,6 +142,7 @@
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Console.cpp" />
+    <ClCompile Include="src\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -156,6 +157,7 @@
     <None Include="Dependencies\GLEW\doc\install.html" />
     <None Include="Dependencies\GLEW\doc\log.html" />
     <None Include="Dependencies\GLEW\doc\wglew.html" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dependencies\GLEW\include\GL\eglew.h" />
@@ -167,6 +169,7 @@
     <ClInclude Include="Dependencies\INIreader\INIreader.hpp" />
     <ClInclude Include="Include\Console.h" />
     <ClInclude Include="Include\InputManager.h" />
+    <ClInclude Include="include\VertexBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

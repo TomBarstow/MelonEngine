@@ -6,6 +6,7 @@
 
 #include <Console.h>
 #include <InputManager.h>
+#include <VertexBuffer.h>
 
 
 int main(void)
@@ -48,6 +49,39 @@ int main(void)
     //InputManager input;
     InputManager::initialize(window);
 
+    //Test Triforce Render
+    GLfloat triforce[] = {
+        // Top triangle
+    -0.3f,  0.0f,  0.0f,  // Vertex 1
+     0.3f,  0.0f,  0.0f,  // Vertex 2
+     0.0f,  0.5f,  0.0f,  // Vertex 3
+
+        // Left triangle
+    -0.6f, -0.5f,  0.0f,  // Vertex 4
+    0.0f, -0.5f,  0.0f,  // Vertex 5
+    -0.3f,  0.0f,  0.0f,  // Vertex 6
+
+        // Right triangle
+    0.0f, -0.5f,  0.0f,  // Vertex 7
+    0.6f, -0.5f,  0.0f,  // Vertex 8
+    0.3f,  0.0f,  0.0f   // Vertex 9
+    };
+
+    VBO vbo = createVBO(triforce, sizeof(triforce));
+    VAO vao = createVAO();
+    bindVBO(vbo);
+    bindVAO(vao);
+
+    // Define the vertex attributes
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+    glEnableVertexAttribArray(0);
+
+    // Unbind the VBO and VAO
+    unbindVBO();
+    unbindVAO();
+
+
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -57,26 +91,22 @@ int main(void)
         if (InputManager::actionPressed("Forward")) {
             Console("W key - Forward");
         }
+        else if (InputManager::actionPressed("Backward")) {
+            Console("S key - Backward");
+        }
+        else if (InputManager::actionPressed("Left")) {
+            Console("A key - Left");
+        }
+        else if (InputManager::actionPressed("Right")) {
+            Console("D key - Right");
+        }
         
         /* Render here */
+        bindVAO(vao);
         glClear(GL_COLOR_BUFFER_BIT);
-
-        //Triforce lol
-        glBegin(GL_TRIANGLES); //top
-        glVertex2f(-0.3f, 0.0f);
-        glVertex2f(0.3f, 0.0f);
-        glVertex2f(0.0f, 0.5f);
-        glBegin(GL_TRIANGLES);  //left
-        glVertex2f(-0.6f, -0.5f);
-        glVertex2f(0.0f, -0.5f);
-        glVertex2f(-0.3f, 0.0f);
-        glBegin(GL_TRIANGLES);  //right
-        glVertex2f(0.0f, -0.5f);
-        glVertex2f(0.6f, -0.5f);
-        glVertex2f(0.3f, 0.0f);
-
-        glEnd();
-
+        glDrawArrays(GL_TRIANGLES, 0, 9);
+        unbindVAO();
+        
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
 
@@ -85,6 +115,11 @@ int main(void)
 
     }
 
+    // Cleanup
+    deleteVBO(vbo);
+    deleteVAO(vao);
+
+    //Terminate GLFW
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
